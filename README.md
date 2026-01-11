@@ -245,36 +245,6 @@ Both approaches use MD simulations, but:
 
 ---
 
-## 📚 Citation
-
-If you use this code, please cite:
-
-**Original Paper:**
-```bibtex
-@article{weber2024molecular,
-  title={Molecular dynamics-derived graph and sequence features outperform physicochemical features in predicting MHC-I peptide immunogenicity},
-  author={Weber, Anna and others},
-  journal={Bioinformatics Advances},
-  volume={4},
-  number={1},
-  pages={bbad504},
-  year={2024},
-  publisher={Oxford University Press}
-}
-```
-
-**This Work:**
-```bibtex
-@misc{peptide_gcn_2026,
-  title={Peptide Immunogenicity Prediction using Graph Convolutional Networks: Reproduction of Weber et al. (2024)},
-  author={[Your Name]},
-  year={2026},
-  howpublished={\url{https://github.com/[your-username]/[repo-name]}}
-}
-```
-
----
-
 ## 📝 Documentation
 
 Detailed documentation available in `md_data/analysis/gcn_models/`:
