@@ -1,0 +1,79 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# GROMACS trajectory files (LARGE!)
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.tpr
+*.gro
+*.mdp
+*.itp
+*.top
+*.log
+*.pdb
+*.dcd
+
+# Large MD data directories
+md_data/systems/
+md_data/trajectories/
+md_data/logs/
+
+# Keep only analysis results
+!md_data/analysis/**/*.csv
+!md_data/analysis/**/*.md
+!md_data/analysis/**/*.txt
+!md_data/analysis/**/*.png
+!md_data/analysis/**/*.pth
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Large data files
+*.tar.gz
+*.zip
+tree.txt
+
+# Claude workspace
+.claude/
+
+# External tools (too large, not needed for reproduction)
+01_tools/
+03_results/
+
+# Documentation files
+04_docs/
+MD_SIMULATION_GUIDE.md
+QUICK_REFERENCE.md
+QUICK_START_MD.md
+SCRIPTS_SUMMARY.md
+
+# Git
+.git/
