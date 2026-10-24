@@ -10,7 +10,7 @@
 
 This repository contains the code and analysis for reproducing **Weber et al. (2024)** ["Molecular dynamics-derived graph and sequence features outperform physicochemical features in predicting MHC-I peptide immunogenicity"](https://doi.org/10.1093/bioadv/bbad504) using **Graph Convolutional Networks (GCNs)** for peptide immunogenicity prediction.
 
-**Key Achievement:** Our GCN implementation achieves **AUC = 0.878**, outperforming the paper's classical ML approach (AUC = 0.81) despite using **96× less data** (30 vs 2,883 peptides).
+**Scope:** This is a small exploratory seminar project (30 HLA-A*02:01 peptides, 70 ns MD each), not a benchmark. It tests whether a GCN can be trained directly on MD-derived residue graphs. With a 6-peptide test set the metrics below are highly uncertain and **cannot be compared with Weber et al. (2024)**, who used 2,883 peptides. See [Limitations](#️-limitations).
 
 ---
 
@@ -24,31 +24,27 @@ This repository contains the code and analysis for reproducing **Weber et al. (2
 
 ---
 
-## 🏆 Main Results
+## 📊 Results (exploratory)
 
 ### Model Performance Comparison
 
 | Model | AUC | Accuracy | Precision | Recall | F1 | Dataset Size |
 |-------|-----|----------|-----------|--------|-----|--------------|
-| **GCN (Our Work)** | **0.878** | 0.500 | 0.500 | **1.000** | 0.667 | 30 peptides, 600 samples |
+| GCN (this project) | 0.878 | 0.500 | 0.500 | 1.000 | 0.667 | 30 peptides, 600 samples |
 | Gradient Boosting | 0.778 | 0.667 | 0.667 | 0.667 | 0.667 | 30 peptides, 4,230 samples |
 | Weber et al. (2024) | 0.81 | - | - | - | - | 2,883 peptides |
 
-### Key Discoveries
+### Observations (not conclusions)
 
-1. **"Less is More"**: GCN with 20 frames/peptide (AUC=0.878) outperforms 70 frames/peptide (AUC=0.658)
-   - Sparse sampling avoids temporal correlation
-   - Deep learning learns from diversity, not redundancy
+1. **The GCN predicts every test peptide as immunogenic** at the default threshold (accuracy 0.50, recall 1.00): its ranking (AUC) looks better than its classification, and with 6 test peptides the AUC is very noisy.
+2. **20 frames/peptide gave a higher test AUC than 70 frames/peptide.** Consecutive MD frames are strongly correlated, so sparser sampling may reduce redundancy, but with this sample size the difference is within the expected noise.
+3. **Graph-based input outperformed sequence-only input** in this setting; this needs confirmation on a larger, multi-allele dataset.
 
-2. **Perfect Recall**: GCN achieves 100% recall (catches ALL immunogenic peptides)
-   - Critical for vaccine design applications
-   - Better safe than sorry approach
-
-3. **Data Efficiency**: Uses only 14% of available data (600 vs 4,230 samples)
-   - Trains in ~3 minutes on CPU
-   - Competitive performance with classical ML
-
-4. **Graph Features Critical**: MD-based graph features outperform sequence-only features by 58%
+### ⚠️ Limitations
+- 30 peptides from a single allele; the 80/20 split leaves **6 test peptides**, so AUC can change substantially with a different split.
+- No repeated cross-validation, confidence intervals or external test set yet.
+- MD length (70 ns) and sampling differ from Weber et al. (2024), so the numbers are not directly comparable.
+- Next steps: repeated/nested cross-validation by peptide, bootstrap confidence intervals, a larger peptide set, and a calibrated decision threshold.
 
 ---
 
@@ -233,7 +229,7 @@ Output Layer (16 → 1) + Sigmoid
 | **Dataset** | 2,883 peptides (multiple HLAs) | 30 peptides (HLA-A*02:01) |
 | **MD Duration** | 200 ns | 70 ns (30-100 ns) |
 | **Features** | Aggregated graph statistics | Graph structure directly |
-| **AUC** | 0.81 | **0.878** (+8.4%) |
+| **AUC** | 0.81 (large dataset) | 0.878 (6 test peptides; not comparable) |
 | **Data Used** | All frames | 20 frames/peptide (optimal) |
 
 ### Key Insight
@@ -241,7 +237,7 @@ Both approaches use MD simulations, but:
 - **Paper:** MD → Hand-crafted graph features → Classical ML
 - **Ours:** MD → Graph structure → GCN (learned features)
 
-**Result:** Deep learning outperforms hand-crafted features!
+**Takeaway:** the GCN pipeline works end to end on MD-derived graphs; whether it beats hand-crafted features can only be tested on a dataset comparable in size to Weber et al.
 
 ---
 
