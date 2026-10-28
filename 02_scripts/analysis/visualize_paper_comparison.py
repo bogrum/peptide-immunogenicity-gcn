@@ -25,7 +25,7 @@ def create_paper_comparison():
     # ========== LEFT PLOT: AUC Comparison ==========
     ax1 = axes[0]
 
-    models = ['Paper:\nClassical ML\n(MD-Graph features)\n2,883 peptides',
+    models = ['Paper:\nGraph convolutions\n(MD-Graph features)\n2,883 peptides',
               'Our Work:\nGCN (Deep Learning)\n(MD-Graph data)\n30 peptides']
     aucs = [0.81, 0.878]
     colors = ['#3498db', '#e74c3c']  # Blue for paper, Red for ours
@@ -67,7 +67,7 @@ def create_paper_comparison():
 ║                                                          ║
 ║  Weber et al. (2024) - bbad504:                          ║
 ║    Data: MD simulations → Graph features                ║
-║    Model: Classical ML (hand-crafted features)          ║
+║    Model: Graph convolutional network (MD-graphs)       ║
 ║    AUC: 0.81                                             ║
 ║    Dataset: 2,883 peptides (multiple HLAs)              ║
 ║    Split: Debiased (sequence clustering)                ║
@@ -142,11 +142,11 @@ def main():
     print("="*70)
 
     print("\nKey Points:")
-    print("  • Paper (Classical ML on MD-Graph): AUC = 0.81 (2,883 peptides)")
+    print("  • Paper (graph convolutions on MD-Graph): AUC = 0.81 (2,883 peptides)")
     print("  • Our Work (GCN Deep Learning on MD-Graph): AUC = 0.878 (30 peptides)")
     print("  • +8.4% improvement despite 96x smaller dataset")
     print("  • Both use MD simulation data, different models:")
-    print("    - Paper: Hand-crafted graph features → Classical ML")
+    print("    - Paper: MD-derived graphs → graph convolutional network")
     print("    - Ours: Graph structure → GCN (learned features)")
     print("  • Key discovery: 20 frames optimal (sparse sampling)")
     print("\n" + "="*70)

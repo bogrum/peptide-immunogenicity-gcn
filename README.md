@@ -8,7 +8,7 @@
 
 ## 📄 Overview
 
-This repository contains the code and analysis for reproducing **Weber et al. (2024)** ["Molecular dynamics-derived graph and sequence features outperform physicochemical features in predicting MHC-I peptide immunogenicity"](https://doi.org/10.1093/bioadv/bbad504) using **Graph Convolutional Networks (GCNs)** for peptide immunogenicity prediction.
+This repository contains the code and analysis for reproducing **Weber et al. (2024)** ["Unsupervised and supervised AI on molecular dynamics simulations reveals complex characteristics of HLA-A2-peptide immunogenicity"](https://doi.org/10.1093/bib/bbad504) (*Briefings in Bioinformatics*, 2024, 25(1), bbad504) using **Graph Convolutional Networks (GCNs)** for peptide immunogenicity prediction.
 
 **Scope:** This is a small exploratory seminar project (30 HLA-A*02:01 peptides, 70 ns MD each), not a benchmark. It tests whether a GCN can be trained directly on MD-derived residue graphs. With a 6-peptide test set the metrics below are highly uncertain and **cannot be compared with Weber et al. (2024)**, who used 2,883 peptides. See [Limitations](#️-limitations).
 
@@ -17,7 +17,7 @@ This repository contains the code and analysis for reproducing **Weber et al. (2
 ## 🎯 Project Goals
 
 1. ✅ Reproduce MD simulation-based analysis from Weber et al. (2024)
-2. ✅ Compare classical ML (paper) vs Deep Learning (GCN) approaches
+2. ✅ Compare classical ML baselines vs Deep Learning (GCN) approaches
 3. ✅ Analyze SASA and RMSD dynamics for immunogenic vs non-immunogenic peptides
 4. ✅ Optimize frame sampling strategy for GCN training
 5. ✅ Create comprehensive visualizations for seminar presentation
@@ -225,19 +225,19 @@ Output Layer (16 → 1) + Sigmoid
 
 | Aspect | Weber et al. (2024) | Our Work |
 |--------|---------------------|----------|
-| **Approach** | Classical ML (hand-crafted features) | GCN (end-to-end learning) |
+| **Approach** | Graph convolutional and sequence models (MD-derived graphs) | GCN (end-to-end learning) |
 | **Dataset** | 2,883 peptides (multiple HLAs) | 30 peptides (HLA-A*02:01) |
 | **MD Duration** | 200 ns | 70 ns (30-100 ns) |
 | **Features** | Aggregated graph statistics | Graph structure directly |
-| **AUC** | 0.81 (large dataset) | 0.878 (6 test peptides; not comparable) |
+| **AUC** | 0.81 (MD-graph model, debiased split, large dataset) | 0.878 (6 test peptides; not comparable) |
 | **Data Used** | All frames | 20 frames/peptide (optimal) |
 
 ### Key Insight
 Both approaches use MD simulations, but:
-- **Paper:** MD → Hand-crafted graph features → Classical ML
+- **Paper:** MD → MD-derived molecular graphs → graph convolutional network
 - **Ours:** MD → Graph structure → GCN (learned features)
 
-**Takeaway:** the GCN pipeline works end to end on MD-derived graphs; whether it beats hand-crafted features can only be tested on a dataset comparable in size to Weber et al.
+**Takeaway:** the GCN pipeline works end to end on MD-derived graphs; whether it beats the paper's models can only be tested on a dataset comparable in size to Weber et al.
 
 ---
 

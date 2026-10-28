@@ -145,6 +145,7 @@ md_data/analysis/
 
 ## References
 
-Weber JK et al. (2024) "Unsupervised and supervised AI on molecular dynamics
-simulations reveals complex characteristics of HLA-A2-peptide immunogenicity"
-*Briefings in Bioinformatics*, 25(1), 1-12.
+Weber JK, Morrone JA, Kang S, et al. (2024) "Unsupervised and supervised AI on
+molecular dynamics simulations reveals complex characteristics of HLA-A2-peptide
+immunogenicity" *Briefings in Bioinformatics*, 25(1), bbad504.
+https://doi.org/10.1093/bib/bbad504
